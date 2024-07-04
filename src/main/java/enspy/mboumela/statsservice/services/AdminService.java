@@ -1,7 +1,9 @@
 package enspy.mboumela.statsservice.services;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,7 @@ public class AdminService {
 	private final ApiCallService apiCallService;
 
 	// fonctions for data 1
-	public double calculRevenu() {
+	public List<Double> calculRevenu() {
 //        String query = "{ passagers { id, profil, voyages { paiement { montant } } } }";
 //        String response = apiCallService.callGraphQLApi("https://your-graphql-api.com/graphql", query);
 //
@@ -57,10 +59,11 @@ public class AdminService {
 //			e.printStackTrace();
 //		}
 //        return sommeTotale;
-		return 250;
+		List<Double> revenus = new ArrayList<>(Arrays.asList(12000.0, 2010.0, 310.0, 10.0, 0.0));
+		return revenus;
 	}
 
-	public double calculNombreVoyage() {
+	public List<Double> calculNombreVoyage() {
 //        String query = "{ trajets { id_trajet, statut_trajet, date_trajet } }";
 //        String response = apiCallService.callGraphQLApi("https://your-graphql-api.com/graphql", query);
 //
@@ -79,10 +82,11 @@ public class AdminService {
 //        }
 //
 //        return nombreVoyagesParDate;
-		return 200;
+		List<Double> nbrVoyages = new ArrayList<>(Arrays.asList(2100.0, 800.0, 100.0, 50.0, 0.0));
+		return nbrVoyages;
 	}
 
-	public double calculTypeVehicule() {
+	public List<Double> calculTypeVehicule() {
 //		String query = "{ vehicules { type_vehicule } }";
 //		String response = apiCallService.callGraphQLApi("https://your-graphql-api.com/graphql", query);
 //
@@ -108,27 +112,80 @@ public class AdminService {
 //		}
 //
 //		return nombreTypesVehicules;
-		return 180;
+		List<Double> revenus = new ArrayList<>(Arrays.asList(90.0, 20.0, 10.0, 2.0, 10.0));
+		return revenus;
 	}
 
-	public AdminDto1 calculData1() {
-		return new AdminDto1(calculRevenu(), calculNombreVoyage(), calculTypeVehicule());
+	public List<AdminDto1> calculData1() {
+		List<AdminDto1> list = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			list.add(new AdminDto1(calculRevenu().get(i), calculNombreVoyage().get(i), calculTypeVehicule().get(i)));
+		}
+		return list;
 	}
 
 	// fonctions for data 2
 	public double calculPassager() {
-//		apiCallService.callGetApi("/get-passsagers");
+//      String query = "{ personnes { role, a_vehicule } }";
+//      String response = apiCallService.callGraphQLApi("https://your-graphql-api.com/graphql", query);
+//
+//      Map<String, Integer> nombrePersonnesParRole = new HashMap<>();
+//
+//      // Analyser la réponse GraphQL pour récupérer les informations sur les personnes
+//      JsonNode jsonNode = new ObjectMapper().readTree(response);
+//      JsonNode personnesNode = jsonNode.path("data").path("personnes");
+//
+//      for (JsonNode personneNode : personnesNode) {
+//          String role = personneNode.path("role").asText();
+//          boolean aVehicule = personneNode.path("a_vehicule").asBoolean();
+//
+//          nombrePersonnesParRole.merge("passagers", role.equals("passager") ? 1 : 0, Integer::sum);
+//      }
+//
+//      return nombrePersonnesParRole;
 		return 500;
 	}
 
 	public double calculProprietaire() {
-//		apiCallService.callGetApi("/get-proprietaire");
+//      String query = "{ personnes { role, a_vehicule } }";
+//      String response = apiCallService.callGraphQLApi("https://your-graphql-api.com/graphql", query);
+//
+//      Map<String, Integer> nombrePersonnesParRole = new HashMap<>();
+//
+//      // Analyser la réponse GraphQL pour récupérer les informations sur les personnes
+//      JsonNode jsonNode = new ObjectMapper().readTree(response);
+//      JsonNode personnesNode = jsonNode.path("data").path("personnes");
+//
+//      for (JsonNode personneNode : personnesNode) {
+//          String role = personneNode.path("role").asText();
+//          boolean aVehicule = personneNode.path("a_vehicule").asBoolean();
+//
+//          nombrePersonnesParRole.merge("conducteurs_avec_vehicule", role.equals("conducteur") && aVehicule ? 1 : 0, Integer::sum);
+//      }
+//
+//      return nombrePersonnesParRole;
 		return 200;
 	}
 
 	public double calculConducteur() {
-//		apiCallService.callGetApi("/get-conducteur");
-		return 150;
+//      String query = "{ personnes { role, a_vehicule } }";
+//      String response = apiCallService.callGraphQLApi("https://your-graphql-api.com/graphql", query);
+//
+//      Map<String, Integer> nombrePersonnesParRole = new HashMap<>();
+//
+//      // Analyser la réponse GraphQL pour récupérer les informations sur les personnes
+//      JsonNode jsonNode = new ObjectMapper().readTree(response);
+//      JsonNode personnesNode = jsonNode.path("data").path("personnes");
+//
+//      for (JsonNode personneNode : personnesNode) {
+//          String role = personneNode.path("role").asText();
+//          boolean aVehicule = personneNode.path("a_vehicule").asBoolean();
+//
+//          nombrePersonnesParRole.merge("conducteurs", role.equals("conducteur") ? 1 : 0, Integer::sum);
+//      }
+//
+//      return nombrePersonnesParRole;
+		return 76;
 	}
 
 	public AdminDto2 calculData2() {
@@ -137,27 +194,108 @@ public class AdminService {
 
 	// fonctions for data 3
 	public double calculVisiteur() {
-//		apiCallService.callGetApi("/get-visiteur");
-		return 1000;
+//      String query = "{ personnes { role, a_vehicule } }";
+//      String response = apiCallService.callGraphQLApi("https://your-graphql-api.com/graphql", query);
+//
+//      Map<String, Integer> nombrePersonnesParRole = new HashMap<>();
+//
+//      // Analyser la réponse GraphQL pour récupérer les informations sur les personnes
+//      JsonNode jsonNode = new ObjectMapper().readTree(response);
+//      JsonNode personnesNode = jsonNode.path("data").path("personnes");
+//
+//      for (JsonNode personneNode : personnesNode) {
+//          String role = personneNode.path("role").asText();
+//          boolean aVehicule = personneNode.path("a_vehicule").asBoolean();
+//
+//          nombrePersonnesParRole.merge("conducteurs", role.equals("conducteur") ? 1 : 0, Integer::sum);
+//      }
+//
+//      return nombrePersonnesParRole;
+		return 800;
 	}
 
 	public double calculUtilisateur() {
-//		apiCallService.callGetApi("/get-utilisateur");
+//      String query = "{ personnes { role, a_vehicule } }";
+//      String response = apiCallService.callGraphQLApi("https://your-graphql-api.com/graphql", query);
+//
+//      Map<String, Integer> nombrePersonnesParRole = new HashMap<>();
+//
+//      // Analyser la réponse GraphQL pour récupérer les informations sur les personnes
+//      JsonNode jsonNode = new ObjectMapper().readTree(response);
+//      JsonNode personnesNode = jsonNode.path("data").path("personnes");
+//
+//      for (JsonNode personneNode : personnesNode) {
+//          String role = personneNode.path("role").asText();
+//          boolean aVehicule = personneNode.path("a_vehicule").asBoolean();
+//
+//          nombrePersonnesParRole.merge("conducteurs", role.equals("conducteur") ? 1 : 0, Integer::sum);
+//      }
+//
+//      return nombrePersonnesParRole;
 		return 100;
 	}
 
 	public AdminDto3 calculData3() {
-
 		return new AdminDto3(calculVisiteur(), calculUtilisateur());
 	}
 
 	// fonction for data 4
 	public AdminDto4 calculData4() {
-		return new AdminDto4(5);
+//      String query = "{ personnes { role, a_vehicule } }";
+//      String response = apiCallService.callGraphQLApi("https://your-graphql-api.com/graphql", query);
+//
+//      Map<String, Integer> nombrePersonnesParRole = new HashMap<>();
+//
+//      // Analyser la réponse GraphQL pour récupérer les informations sur les personnes
+//      JsonNode jsonNode = new ObjectMapper().readTree(response);
+//      JsonNode personnesNode = jsonNode.path("data").path("personnes");
+//
+//      for (JsonNode personneNode : personnesNode) {
+//          String role = personneNode.path("role").asText();
+//          boolean aVehicule = personneNode.path("a_vehicule").asBoolean();
+//
+//          nombrePersonnesParRole.merge("conducteurs", role.equals("conducteur") ? 1 : 0, Integer::sum);
+//      }
+//
+//      return nombrePersonnesParRole;
+		return new AdminDto4(4);
 	}
 
 	// fonction for journal data
 	public List<AdminJournalDto> calculJournal() {
+//		 try {
+//		        // Analyser la réponse JSON de l'API GraphQL
+//		        JsonNode jsonNode = new ObjectMapper().readTree(graphQLResponse);
+//		        JsonNode personnesNode = jsonNode.path("data").path("personnes");
+//
+//		        // Initialiser le journal d'activité
+//		        StringBuilder activityLog = new StringBuilder();
+//		        activityLog.append("Journal d'activité des clients :\n\n");
+//
+//		        // Parcourir les données des personnes
+//		        for (JsonNode personneNode : personnesNode) {
+//		            boolean hasVehicle = personneNode.path("a_vehicule").asBoolean();
+//		            if (hasVehicle) {
+//		                String nom = personneNode.path("nom").asText();
+//		                String prenom = personneNode.path("prenom").asText();
+//		                String destination = personneNode.path("destination").asText();
+//		                double moneySpent = personneNode.path("depenses").asDouble();
+//		                String vehicleId = personneNode.path("vehicule_id").asText();
+//
+//		                activityLog.append("Nom : ").append(nom).append(" ").append(prenom).append("\n");
+//		                activityLog.append("Destination : ").append(destination).append("\n");
+//		                activityLog.append("Dépenses : ").append(moneySpent).append(" €").append("\n");
+//		                activityLog.append("Véhicule utilisé : ").append(vehicleId).append("\n");
+//		                activityLog.append("\n");
+//		            }
+//		        }
+//
+//		        // Afficher le journal d'activité
+//		        System.out.println(activityLog.toString());
+//		    } catch (IOException e) {
+//		        // Gérer les erreurs de lecture du JSON
+//		        e.printStackTrace();
+//		    }
 		List<AdminJournalDto> adminJournalDtos = new ArrayList<>();
 		AdminJournalDto adminJournalDto1 = new AdminJournalDto(1, "Antique Fjord hotel", "3605 Parker Rd.",
 				"Kriston Watson", "25/05/2023", "Publish", 4.5);
@@ -174,11 +312,11 @@ public class AdminService {
 		AdminJournalDto adminJournalDto7 = new AdminJournalDto(7, "Mountain View Chalet", "555 Summit Ave.",
 				"James Wilson", "24/06/2023", "Rejected", 4.1);
 		AdminJournalDto adminJournalDto8 = new AdminJournalDto(8, "Urban Studio Apartment", "222 Oak St.",
-				"Ava Martinez", "26/06/2023", "Pending", 4.9);
+				"Ava Martinez", "26/06/2023", "Pending", 3.9);
 		AdminJournalDto adminJournalDto9 = new AdminJournalDto(9, "Historic Manor House", "777 Elm Rd.", "Liam Davis",
 				"28/06/2023", "Publish", 4.7);
 		AdminJournalDto adminJournalDto10 = new AdminJournalDto(10, "Lakefront Retreat", "444 Lakeview Dr.",
-				"Mia Anderson", "30/06/2023", "Pending", 4.4);
+				"Mia Anderson", "30/06/2023", "Pending", 2.4);
 		adminJournalDtos.add(adminJournalDto1);
 		adminJournalDtos.add(adminJournalDto2);
 		adminJournalDtos.add(adminJournalDto3);

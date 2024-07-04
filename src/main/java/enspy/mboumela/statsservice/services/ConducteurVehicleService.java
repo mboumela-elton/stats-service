@@ -1,67 +1,96 @@
 package enspy.mboumela.statsservice.services;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 import enspy.mboumela.statsservice.dtos.conducteurVehicule.ConducteurVehiculeDto1;
 import enspy.mboumela.statsservice.dtos.conducteurVehicule.ConducteurVehiculeDto2;
 import enspy.mboumela.statsservice.dtos.conducteurVehicule.ConducteurVehiculeDto3;
 import enspy.mboumela.statsservice.dtos.conducteurVehicule.ConducteurVehiculeJournalDto;
+import enspy.mboumela.statsservice.dtos.passager.PassagerDto2;
+import enspy.mboumela.statsservice.dtos.passager.PassagerJournalDto;
 
 @Service
 public class ConducteurVehicleService {
 
 	// fonction de data 1
-	public ConducteurVehiculeDto1 calculGain() {
-		return new ConducteurVehiculeDto1(100.2);
+	public List<ConducteurVehiculeDto1> calculGain() {
+		List<Double> revenus = new ArrayList<>(Arrays.asList(2100.0, 7200.0, 300.0, 0.0, 0.0));
+		List<ConducteurVehiculeDto1> list = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			list.add(new ConducteurVehiculeDto1(revenus.get(i)));
+		}
+		return list;
 	}
-	
+
 	// fonction de data 2
-	public ConducteurVehiculeDto2 calculNbrVoyagePublie() {
-		return new ConducteurVehiculeDto2(12);
+	public List<ConducteurVehiculeDto2> calculNbrVoyagePublie() {
+		List<Double> revenus = new ArrayList<>(Arrays.asList(100.0, 52.0, 40.0, 2.0, 0.0));
+		List<ConducteurVehiculeDto2> list = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			list.add(new ConducteurVehiculeDto2(revenus.get(i)));
+		}
+		return list;
 	}
-	
+
 	// fonction de data 3
 	public ConducteurVehiculeDto3 calculAvis() {
-		return new ConducteurVehiculeDto3(26);
+		return new ConducteurVehiculeDto3(11.5);
 	}
-	
+
 	// fonction for journal data
-		public List<ConducteurVehiculeJournalDto> calculJournal() {
-			List<ConducteurVehiculeJournalDto> ConducteurVehiculeJournalDtos = new ArrayList<>();
-			ConducteurVehiculeJournalDto ConducteurVehiculeJournalDto1 = new ConducteurVehiculeJournalDto(1, "Antique Fjord hotel", "3605 Parker Rd.",
-					"Kriston Watson", "25/05/2023", "Publish", 4.5);
-			ConducteurVehiculeJournalDto ConducteurVehiculeJournalDto2 = new ConducteurVehiculeJournalDto(2, "Cozy Retreat Cottage", "123 Main St.",
-					"Emma Thompson", "10/06/2023", "Pending", 4.7);
-			ConducteurVehiculeJournalDto ConducteurVehiculeJournalDto3 = new ConducteurVehiculeJournalDto(3, "Luxury Beach Villa", "987 Ocean Ave.",
-					"Michael Johnson", "12/06/2023", "Rejected", 4.3);
-			ConducteurVehiculeJournalDto ConducteurVehiculeJournalDto4 = new ConducteurVehiculeJournalDto(4, "Rustic Mountain Cabin", "456 Pine Rd.", "Sophia Lee",
-					"18/06/2023", "Publish", 4.2);
-			ConducteurVehiculeJournalDto ConducteurVehiculeJournalDto5 = new ConducteurVehiculeJournalDto(5, "City Center Loft", "789 Broadway St.", "David Brown",
-					"20/06/2023", "Pending", 4.8);
-			ConducteurVehiculeJournalDto ConducteurVehiculeJournalDto6 = new ConducteurVehiculeJournalDto(6, "Seaside Bungalow", "321 Shoreline Dr.",
-					"Olivia Garcia", "22/06/2023", "Publish", 4.6);
-			ConducteurVehiculeJournalDto ConducteurVehiculeJournalDto7 = new ConducteurVehiculeJournalDto(7, "Mountain View Chalet", "555 Summit Ave.",
-					"James Wilson", "24/06/2023", "Rejected", 4.1);
-			ConducteurVehiculeJournalDto ConducteurVehiculeJournalDto8 = new ConducteurVehiculeJournalDto(8, "Urban Studio Apartment", "222 Oak St.",
-					"Ava Martinez", "26/06/2023", "Pending", 4.9);
-			ConducteurVehiculeJournalDto ConducteurVehiculeJournalDto9 = new ConducteurVehiculeJournalDto(9, "Historic Manor House", "777 Elm Rd.", "Liam Davis",
-					"28/06/2023", "Publish", 4.7);
-			ConducteurVehiculeJournalDto ConducteurVehiculeJournalDto10 = new ConducteurVehiculeJournalDto(10, "Lakefront Retreat", "444 Lakeview Dr.",
-					"Mia Anderson", "30/06/2023", "Pending", 4.4);
-			ConducteurVehiculeJournalDtos.add(ConducteurVehiculeJournalDto1);
-			ConducteurVehiculeJournalDtos.add(ConducteurVehiculeJournalDto2);
-			ConducteurVehiculeJournalDtos.add(ConducteurVehiculeJournalDto3);
-			ConducteurVehiculeJournalDtos.add(ConducteurVehiculeJournalDto4);
-			ConducteurVehiculeJournalDtos.add(ConducteurVehiculeJournalDto5);
-			ConducteurVehiculeJournalDtos.add(ConducteurVehiculeJournalDto6);
-			ConducteurVehiculeJournalDtos.add(ConducteurVehiculeJournalDto7);
-			ConducteurVehiculeJournalDtos.add(ConducteurVehiculeJournalDto8);
-			ConducteurVehiculeJournalDtos.add(ConducteurVehiculeJournalDto9);
-			ConducteurVehiculeJournalDtos.add(ConducteurVehiculeJournalDto10);
-			return ConducteurVehiculeJournalDtos;
-		}
+	public List<ConducteurVehiculeJournalDto> calculJournal() {
+//		try {
+//			// Analyser la réponse JSON de l'API GraphQL
+//			JsonNode jsonNode = new ObjectMapper().readTree(graphQLResponse);
+//			JsonNode personnesNode = jsonNode.path("data").path("personnes");
+//
+//			// Initialiser le journal d'activité
+//			StringBuilder activityLog = new StringBuilder();
+//			activityLog.append("Journal d'activité des clients :\n\n");
+//
+//			// Parcourir les données des personnes
+//			for (JsonNode personneNode : personnesNode) {
+//				boolean hasVehicle = personneNode.path("a_vehicule").asBoolean();
+//				if (hasVehicle) {
+//					String nom = personneNode.path("nom").asText();
+//					String prenom = personneNode.path("prenom").asText();
+//					String destination = personneNode.path("destination").asText();
+//					double moneySpent = personneNode.path("depenses").asDouble();
+//					String vehicleId = personneNode.path("vehicule_id").asText();
+//
+//					activityLog.append("Nom : ").append(nom).append(" ").append(prenom).append("\n");
+//					activityLog.append("Destination : ").append(destination).append("\n");
+//					activityLog.append("Dépenses : ").append(moneySpent).append(" €").append("\n");
+//					activityLog.append("Véhicule utilisé : ").append(vehicleId).append("\n");
+//					activityLog.append("\n");
+//				}
+//			}
+//
+//			// Afficher le journal d'activité
+//			System.out.println(activityLog.toString());
+//		} catch (IOException e) {
+//			// Gérer les erreurs de lecture du JSON
+//			e.printStackTrace();
+//		}
+		List<ConducteurVehiculeJournalDto> conducteurVehiculeJournalDtos = new ArrayList<>();
+		conducteurVehiculeJournalDtos.add(new ConducteurVehiculeJournalDto(1, "Passager 1", 150.0, "2023-05-25", "Antique Fjord hotel", true, "Accept", "12:30", 4.5));
+		conducteurVehiculeJournalDtos.add(new ConducteurVehiculeJournalDto(2, "Passager 2", 120.0, "2023-06-10", "Cozy Retreat Cottage", true, "Pending", "15:45", 4.7));
+		conducteurVehiculeJournalDtos.add(new ConducteurVehiculeJournalDto(3, "Passager 3", 200.0, "2023-06-12", "Luxury Beach Villa", false, "Rejected", "18:20", 4.3));
+		conducteurVehiculeJournalDtos.add(new ConducteurVehiculeJournalDto(4, "Passager 4", 90.0, "2023-06-18", "Rustic Mountain Cabin", true, "Accept", "10:00", 4.2));
+		conducteurVehiculeJournalDtos.add(new ConducteurVehiculeJournalDto(5, "Passager 5", 180.0, "2023-06-20", "City Center Loft", true, "Pending", "13:40", 4.8));
+		conducteurVehiculeJournalDtos.add(new ConducteurVehiculeJournalDto(6, "Passager 6", 130.0, "2023-06-22", "Seaside Bungalow", true, "Accept", "16:15", 4.6));
+		conducteurVehiculeJournalDtos.add(new ConducteurVehiculeJournalDto(7, "Passager 7", 110.0, "2023-06-24", "Mountain View Chalet", false, "Rejected", "19:00", 4.1));
+		conducteurVehiculeJournalDtos.add(new ConducteurVehiculeJournalDto(8, "Passager 8", 220.0, "2023-06-26", "Urban Studio Apartment", true, "Pending", "11:25", 4.9));
+		conducteurVehiculeJournalDtos.add(new ConducteurVehiculeJournalDto(9, "Passager 9", 160.0, "2023-06-28", "Historic Manor House", true, "Accept", "14:50", 4.7));
+		conducteurVehiculeJournalDtos.add(new ConducteurVehiculeJournalDto(10, "Passager 10", 100.0, "2023-06-30", "Lakefront Retreat", true, "Pending", "17:30", 4.4));
+		return conducteurVehiculeJournalDtos;
+	}
 
 }

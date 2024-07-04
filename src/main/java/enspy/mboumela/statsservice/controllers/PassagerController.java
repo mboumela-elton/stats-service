@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import enspy.mboumela.statsservice.dtos.admin.AdminDto1;
-import enspy.mboumela.statsservice.dtos.admin.AdminJournalDto;
 import enspy.mboumela.statsservice.dtos.passager.PassagerDto1;
 import enspy.mboumela.statsservice.dtos.passager.PassagerDto2;
 import enspy.mboumela.statsservice.dtos.passager.PassagerDto3;
@@ -29,8 +27,8 @@ public class PassagerController {
 	}
 
 	@GetMapping("/get-passager-data2")
-	public ResponseEntity<PassagerDto2> data2() {
-		PassagerDto2 passagerDto2 = passagerService.calculStatistiques();
+	public ResponseEntity<List<PassagerDto2>> data2() {
+		List<PassagerDto2> passagerDto2 = passagerService.calculStatistiques();
 		return new ResponseEntity<>(passagerDto2, HttpStatus.OK);
 	}
 
